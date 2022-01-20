@@ -181,87 +181,14 @@ int main(int argc, char** argv) {
 		}
 	}
 
-    
-    // printf("og\n");
-    // for (i=0; i<erowdim; i++){
-	// 	for (j=0; j<ecoldim; j++) {
-    //         printf("%lf ", og[i][j]);
-	// 	}
-    //     printf("\n");
-	// }
-    // printf("x\n");
-    // for (i=0; i<erowdim; i++){
-	// 	for (j=0; j<ecoldim; j++) {
-    //         printf("%lf ", x[i][j]);
-	// 	}
-    //     printf("\n");
-	// }
-    // printf("xt\n");
-    // for (i=0; i<erowdimt; i++){
-	// 	for (j=0; j<ecoldimt; j++) {
-    //         printf("%lf ", xt[i][j]);
-	// 	}
-    //     printf("\n");
-	// }
-    
-    
-    multiply(xt, x, xtx, erowdimt, ecoldimt, erowdim, ecoldim);
 
-    // printf("xtx\n");
-    // for (i=0; i<erowdimt; i++){
-	// 	for (j=0; j<ecoldim; j++) {
-    //         printf("%lf ", xtx[i][j]);
-	// 	}
-    //     printf("\n");
-	// }
+    multiply(xt, x, xtx, erowdimt, ecoldimt, erowdim, ecoldim);
 
     inverse(xtx, id, erowdimt);
 
-    // printf("xtx\n");
-    // for (i=0; i<erowdimt; i++){
-	// 	for (j=0; j<ecoldim; j++) {
-    //         printf("%lf ", xtx[i][j]);
-	// 	}
-    //     printf("\n");
-	// }
-
-    // printf("id\n");
-    // for (i=0; i<erowdimt; i++){
-	// 	for (j=0; j<ecoldim; j++) {
-    //         printf("%lf ", id[i][j]);
-	// 	}
-    //     printf("\n");
-	// }
-
-    //printf("done\n");
     multiply(id, xt, idxt, erowdimt, ecoldim, erowdimt, ecoldimt);
 
-    
-    // printf("idxt\n");
-    // for (i=0; i<erowdimt; i++){
-	// 	for (j=0; j<ecoldimt; j++) {
-    //         printf("%lf ", idxt[i][j]);
-	// 	}
-    //     printf("\n");
-	// }
-    
-    /*
-    printf("y\n");
-    for (i=0; i<erowdim; i++){
-        printf("%lf ", y[i][0]);
-        printf("\n");
-	}
-    */
-
     multiply(idxt, y, idxty, erowdimt, ecoldimt, erowdim, 1);
-    
-    /*
-    printf("idxty\n");
-    for (i=0; i<erowdimt; i++){
-        printf("%lf ", idxty[i][0]);
-        printf("\n");
-	}
-    */
 
     //data
     FILE* data;
