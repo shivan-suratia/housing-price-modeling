@@ -60,8 +60,6 @@ int main(int argc, char** argv) {
     int i;
     int j;
 
-
-
     //estimate
     FILE* est;
     est=fopen(argv[1],"r");
@@ -79,12 +77,11 @@ int main(int argc, char** argv) {
     //printf("%d", erowdim);
     fscanf(est, "%d", &erowdim);
     //printf("%d", ecoldim);
-
+	
     ecoldim += 1;
-
+	
     int erowdimt = ecoldim;
     int ecoldimt = erowdim;
-
 
     //og
     double ** og = (double ** )malloc(sizeof(double *) * erowdim);
@@ -121,24 +118,18 @@ int main(int argc, char** argv) {
         for (i=0; i<erowdimt; i++) {
             idxt[i] = (double*)malloc(sizeof(double) * ecoldimt);
         }
-
     //idxty
     double ** idxty = (double ** )malloc(sizeof(double *) * erowdimt);
         for (i=0; i<erowdimt; i++) {
             idxty[i] = (double*)malloc(sizeof(double) * 1);
         }
-
     //erowdim += 1;
-
     //og
     for (i=0; i<erowdim; i++){
 		for (j=0; j<ecoldim; j++) {
-
 			    fscanf(est, "%lf", &og[i][j]);
-            
 		}
 	}
-    
     //x
     for (i=0; i<erowdim; i++){
 		for (j=0; j<ecoldim; j++) {
@@ -183,11 +174,8 @@ int main(int argc, char** argv) {
 
 
     multiply(xt, x, xtx, erowdimt, ecoldimt, erowdim, ecoldim);
-
     inverse(xtx, id, erowdimt);
-
     multiply(id, xt, idxt, erowdimt, ecoldim, erowdimt, ecoldimt);
-
     multiply(idxt, y, idxty, erowdimt, ecoldimt, erowdim, 1);
 
     //data
@@ -207,10 +195,7 @@ int main(int argc, char** argv) {
     //printf("%d\n", dcoldim);
     fscanf(data, "%d", &drowdim);
     //printf("%d\n", drowdim);
-
     int dcoldimx = dcoldim + 1;
-
-
     //ogd
     double ** ogd = (double ** )malloc(sizeof(double *) * drowdim);
         for (i=0; i<drowdim; i++) {
@@ -221,7 +206,6 @@ int main(int argc, char** argv) {
     for (i=0; i<drowdim; i++) {
         xd[i] = (double*)malloc(sizeof(double) * dcoldimx);
     }
-
     //ogd
     for (i=0; i<drowdim; i++){
 		for (j=0; j<dcoldimx; j++) {
@@ -233,28 +217,15 @@ int main(int argc, char** argv) {
                 } 
 		}
 	}
-    /*
-    printf("ogd\n");
-    for (i=0; i<drowdim; i++){
-		for (j=0; j<dcoldimx; j++) {
-            printf("%lf ", ogd[i][j]);
-		}
-        printf("\n");
-	}
-    */
     double ** final = (double ** )malloc(sizeof(double *) * drowdim);
     for (i=0; i<drowdim; i++) {
         final[i] = (double*)malloc(sizeof(double) * 1);
     }
-
     multiply(ogd, idxty, final, drowdim, dcoldimx, erowdimt, 1);
-
-    //printf("final\n");
     for (i=0; i<drowdim; i++){
         printf("%.0f", final[i][0]);
         printf("\n");
 	}
-
     for (i=0; i<erowdim; i++) {
             free(og[i]);
             free(x[i]);
@@ -263,7 +234,6 @@ int main(int argc, char** argv) {
     free(og);
     free(x);
     free(y);
-
     for (i=0; i<erowdimt; i++) {
             free(xt[i]);
             free(xtx[i]);
@@ -276,7 +246,6 @@ int main(int argc, char** argv) {
     free(id);
     free(idxt);
     free(idxty);
-
     for(i=0; i<drowdim; i++) {
         free(ogd[i]);
         free(xd[i]);
